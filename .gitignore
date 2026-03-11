@@ -1,0 +1,22 @@
+# Ignore build output
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.settings/
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Docker volumes
+prometheus-data/
+grafana-data/
