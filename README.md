@@ -93,21 +93,10 @@ mvn test
 ### Visual Proof
 
 #### 1. Grafana Dashboard - Custom Prometheus Counter
-> Screenshot showing `inventory_requests_total` counter grouped by `status` tag (success/error)
+![alt text](<Screenshot from 2026-03-12 11-53-30.png>)
 
-*TODO: Add screenshot after running the observability stack*
-
-#### 2. Grafana Explore - Loki JSON Structured Logs
-> Screenshot showing the Grafana Explore view querying JSON structured logs from Loki
-
-*TODO: Add screenshot after running the observability stack*
-
-#### 3. Terminal - Raw JSON Structured Logs
-> Screenshot showing the raw JSON structured log output in the terminal/console
-
-*TODO: Add screenshot after running the observability stack*
-
----
+####2. Prometheus target
+![alt text](<Screenshot from 2026-03-12 11-29-33.png>)
 
 ### Project Structure
 ```
