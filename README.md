@@ -93,10 +93,9 @@ mvn test
 ### Visual Proof
 
 #### 1. Grafana Dashboard - Custom Prometheus Counter
-Screenshot from 2026-03-16 12-07-55.png
-
+![Screenshot from 2026-03-12 11-53-30.png](assets/Screenshot%20from%202026-03-12%2011-53-30.png)
 #### 2. Grafana Explore - Loki JSON Structured Logs
-Screenshot from 2026-03-16 12-03-38.png
+![Screenshot from 2026-03-12 11-29-33.png](assets/Screenshot%20from%202026-03-12%2011-29-33.png)
 
 
 ---
@@ -167,9 +166,8 @@ for i in $(seq 1 100); do curl -s http://localhost:8080/api/inventory/$((RANDOM 
 
 Use the random 500 errors and the `traceId`/`spanId` fields in Loki logs to locate the corresponding traces in Tempo.
 
-### Visual Proof (to be attached by you)
+### Visual Proof
 
-Please capture and attach the following screenshots before submission:
 
-1. Screenshot from 2026-03-16 12-27-49.png
-3. Screenshot from 2026-03-16 12-30-01.png
+1. ![Screenshot from 2026-03-16 12-07-55.png](assets/Screenshot%20from%202026-03-16%2012-07-55.png)
+3. ![Screenshot from 2026-03-16 12-30-01.png](assets/Screenshot%20from%202026-03-16%2012-30-01.png)
