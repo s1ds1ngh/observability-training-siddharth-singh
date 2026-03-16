@@ -171,6 +171,5 @@ Use the random 500 errors and the `traceId`/`spanId` fields in Loki logs to loca
 
 Please capture and attach the following screenshots before submission:
 
-1. Grafana Tempo Gantt chart showing the full request trace, including the custom `validate-inventory` span.
-2. A trace with a failed span (red) caused by a simulated HTTP 500 error.
-3. Grafana Explore view showing a JSON log containing `traceId` and `spanId`, alongside the matching trace opened in Tempo.
+1. Screenshot from 2026-03-16 12-27-49.png
+3. Screenshot from 2026-03-16 12-30-01.png
