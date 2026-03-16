@@ -93,19 +93,11 @@ mvn test
 ### Visual Proof
 
 #### 1. Grafana Dashboard - Custom Prometheus Counter
-> Screenshot showing `inventory_requests_total` counter grouped by `status` tag (success/error)
-
-*TODO: Add screenshot after running the observability stack*
+Screenshot from 2026-03-16 12-07-55.png
 
 #### 2. Grafana Explore - Loki JSON Structured Logs
-> Screenshot showing the Grafana Explore view querying JSON structured logs from Loki
+Screenshot from 2026-03-16 12-03-38.png
 
-*TODO: Add screenshot after running the observability stack*
-
-#### 3. Terminal - Raw JSON Structured Logs
-> Screenshot showing the raw JSON structured log output in the terminal/console
-
-*TODO: Add screenshot after running the observability stack*
 
 ---
 
@@ -131,3 +123,54 @@ day1-foundations-workshop/
 ├── Dockerfile
 └── pom.xml
 ```
+
+---
+
+## Day 2: Advanced Workshop - Distributed Tracing
+
+This folder `day2-advanced-workshop` extends the Day 1 inventory service with **distributed tracing** using **Micrometer Tracing**, **OpenTelemetry**, **OpenTelemetry Collector**, and **Grafana Tempo**.
+
+### Tracing Architecture
+
+- Application (Spring Boot + Micrometer Tracing)
+- OpenTelemetry OTLP exporter (via Spring Boot management.otlp.tracing)
+- OpenTelemetry Collector (`otel-collector` service in Docker Compose)
+- Grafana Tempo (`tempo` service in Docker Compose)
+- Grafana for Tempo trace visualization
+
+### Key Additions
+
+- **Distributed Tracing**: Micrometer Tracing + OpenTelemetry bridge and OTLP exporter dependencies in `pom.xml`.
+- **Tracing Configuration**: `management.tracing.*` and `management.otlp.tracing.endpoint` properties in `application.properties`.
+- **Log–Trace Correlation**: `logback-spring.xml` updated so every JSON log includes `traceId` and `spanId`.
+- **Custom Span**: `InventoryController` creates a nested span (`validate-inventory`) with attribute `item.id={itemId}` to tag each request.
+- **OTel Collector & Tempo**: `docker-compose.yml` extended with `otel-collector` and `tempo` services to receive and store traces.
+
+### How to Run Day 2 Stack
+
+```bash
+cd day2-advanced-workshop
+docker compose up -d --build
+```
+
+Services:
+
+- Application: `http://localhost:8080/api/inventory/1`
+- Grafana: `http://localhost:3001` (admin/admin)
+- Tempo: accessed via Grafana Tempo data source
+
+Generate traffic and error traces:
+
+```bash
+for i in $(seq 1 100); do curl -s http://localhost:8080/api/inventory/$((RANDOM % 50 + 1)) > /dev/null; done
+```
+
+Use the random 500 errors and the `traceId`/`spanId` fields in Loki logs to locate the corresponding traces in Tempo.
+
+### Visual Proof (to be attached by you)
+
+Please capture and attach the following screenshots before submission:
+
+1. Grafana Tempo Gantt chart showing the full request trace, including the custom `validate-inventory` span.
+2. A trace with a failed span (red) caused by a simulated HTTP 500 error.
+3. Grafana Explore view showing a JSON log containing `traceId` and `spanId`, alongside the matching trace opened in Tempo.
